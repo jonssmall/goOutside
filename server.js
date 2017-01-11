@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
 
 app.use(bodyParser.json());
-app.use('/app', express.static(process.cwd() + '/app'));
+app.use('/client', express.static(process.cwd() + '/client'));
 
 app.use(session({
 	secret: 'secretClementine',

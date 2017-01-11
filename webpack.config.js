@@ -7,10 +7,10 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
     entry: [
-        './app/app.js'
+        './client/app.js'
     ],
     output: {
-        path: __dirname + '/app',
+        path: __dirname + '/client',
         filename: "index.js"
     },
     module: {

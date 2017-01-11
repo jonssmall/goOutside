@@ -17,7 +17,7 @@ module.exports = function (app, passport) {
 
 	app.route('/')
 		.get(function (req, res) {
-			res.sendFile(path + '/app/index.html');
+			res.sendFile(path + '/client/index.html');
 		});
 
 	app.route('/login')
@@ -45,10 +45,13 @@ module.exports = function (app, passport) {
 		.get(passport.authenticate('github'));
 
 	app.route('/auth/github/callback')
-		.get(passport.authenticate('github', {
-			successRedirect: '/',
-			failureRedirect: '/login'
-		}));
+        .get((req, res) => {
+                console.log(res);
+                passport.authenticate('github', {
+                successRedirect: '/',
+                failureRedirect: '/login'
+            });
+        });
 
 	// app.route('/api/:id/clicks')
 	// 	.get(isLoggedIn, clickHandler.getClicks)

@@ -1,9 +1,15 @@
-var React = require('react');
+const React = require('react');
+const Bars = require('./BarsContainer.js');
 
 var HomeContainer = React.createClass({
-  render: function () {
-    return <p>Hello world</p>;
-  }
+    render: function () {
+        return (
+            <div>
+                <p>Hello world</p>
+                <Bars />
+            </div>
+        )
+    }
 });
 
 module.exports = HomeContainer;

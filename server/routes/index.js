@@ -53,9 +53,7 @@ module.exports = function (app, passport, yelpOptions) {
             // });
             res.redirect('/');
         });
-
-	// app.route('/api/:id/clicks')
-	// 	.get(isLoggedIn, clickHandler.getClicks)
-	// 	.post(isLoggedIn, clickHandler.addClick)
-	// 	.delete(isLoggedIn, clickHandler.resetClicks);
+	
+	app.route('/bars/:location')
+		.get(bars.searchByArea);
 };

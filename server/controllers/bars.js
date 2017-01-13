@@ -4,14 +4,15 @@ var Yelp = require('yelp');
 module.exports = (options) => {
     let yelp = new Yelp(options);
     let api = {
-        getBarsByArea: function(location) {
+        searchByArea: function(req, res) {
             // See http://www.yelp.com/developers/documentation/v2/search_api
-            yelp.search({ term: 'bar', location: location })
-                .then(function (data) {
-                console.log(data);
+            yelp.search({ term: 'bar', location: req.params.location })
+            .then(function (data) {
+                res.json(data);
             })
             .catch(function (err) {
                 console.error(err);
+                res.status(500).send("Server error - check logs");
             });
         }
     }

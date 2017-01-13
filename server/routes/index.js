@@ -1,9 +1,9 @@
 'use strict';
 
-var path = process.cwd();
-// var ClickHandler = require(path + '/server/controllers/serverClicks.js');
+const path = process.cwd();
+const barApi = require(path + '/server/controllers/bars.js');
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, yelpOptions) {
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -13,7 +13,7 @@ module.exports = function (app, passport) {
 		}
 	}
 
-	// var clickHandler = new ClickHandler();
+	let bars = barApi(yelpOptions);
 
 	app.route('/')
 		.get(function (req, res) {

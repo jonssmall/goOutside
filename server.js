@@ -26,7 +26,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-routes(app, passport);
+const yelpOptions = {
+  consumer_key: process.env.YELP_CONSUMER_KEY,
+  consumer_secret: process.env.YELP_CONSUMER_SECRET,
+  token: process.env.YELP_TOKEN,
+  token_secret: process.env.YELP_TOKEN_SECRET
+};
+
+routes(app, passport, yelpOptions);
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {

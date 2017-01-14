@@ -55,5 +55,9 @@ module.exports = function (app, passport, yelpOptions) {
         });
 	
 	app.route('/bars/:location')
-		.get(bars.searchByArea);
+		.get(bars.searchByArea)
+		.post(isLoggedIn, (req, res) => {
+			// req.params.location
+			console.log(req.user);
+		});
 };

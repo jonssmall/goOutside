@@ -1,6 +1,8 @@
 'use strict';
 
 var Yelp = require('yelp');
+var Users = require('../models/users.js');
+
 module.exports = (options) => {
     let yelp = new Yelp(options);
     let api = {

@@ -13,7 +13,7 @@ let BarsContainer = React.createClass({
         api.getBars(location)
         .then(result => {            
             if(result.data) {
-                //console.log(result.data);
+                console.log(result.data);
                 this.setState({
                     bars: result.data.businesses
                 });                

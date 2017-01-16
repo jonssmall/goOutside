@@ -15,8 +15,14 @@ module.exports = function (app, passport, yelpOptions) {
 
 	let bars = barApi(yelpOptions);
 
+	//Express templating doesn't pass user state to React app, requires quasi-redundant state call
+	app.route('/signedOn')
+        .get(function(req, res) {
+            res.send(req.isAuthenticated());
+        })
+
 	app.route('/')
-		.get(function (req, res) {
+		.get(function (req, res) {			
 			res.sendFile(path + '/client/index.html');
 		});
 
@@ -28,13 +34,8 @@ module.exports = function (app, passport, yelpOptions) {
 	app.route('/logout')
 		.get(function (req, res) {
 			req.logout();
-			res.redirect('/login');
-		});
-
-	app.route('/profile')
-		.get(isLoggedIn, function (req, res) {
-			// res.sendFile(path + '/public/profile.html');
-		});
+			res.redirect('/');
+		});	
 
 	app.route('/api/:id')
 		.get(isLoggedIn, function (req, res) {
@@ -45,14 +46,10 @@ module.exports = function (app, passport, yelpOptions) {
 		.get(passport.authenticate('github'));
 
 	app.route('/auth/github/callback')
-        .get((req, res) => {
-            console.log(res);
-            // passport.authenticate('github', {
-            //     successRedirect: '/',
-            //     failureRedirect: '/login'
-            // });
-            res.redirect('/');
-        });
+		.get(passport.authenticate('github', {
+			successRedirect: '/',
+			failureRedirect: '/'
+		}));
 	
 	app.route('/bars/:location')
 		.get(bars.searchByArea);

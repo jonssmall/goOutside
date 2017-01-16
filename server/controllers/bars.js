@@ -27,6 +27,14 @@ module.exports = (options) => {
                 console.error(err);
                 res.status(500).send("Server error - check logs");
             });
+        },
+        setUserLocation: (req, res) => {
+            Users.findOneAndUpdate({ 'github.id': req.user.github.id }, { 'location': req.params.location })
+			.exec(function (err, result) {
+					if (err) { throw err; }
+					res.json(result);
+				}
+			);
         }
     }   
     return api;

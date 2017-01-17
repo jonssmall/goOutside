@@ -5,23 +5,28 @@ const auth = require('../helpers/authHelpers');
 var HomeContainer = React.createClass({
     getInitialState: function() {
         return {
-            signedOn: false,            
+            signedOn: false,
+            display: 'none'      
         }
     },
     //calls twice and makes a hideous screen flicker.
     componentWillMount: function() {        
         auth.isSignedOn()
-        .then(result => {
-            if(result.data) {
+        .then(result => {            
+            if(result) {
                 this.setState({
-                    signedOn: result.data
-                });
+                    signedOn: result.data,
+                    display: 'block'
+                });                
             }
         });
     },
-    render: function () {        
+    render: function () {
+        let shellStyle = {
+            display: this.state.display
+        }; 
         return (
-            <div>
+            <div style={shellStyle}>
                 <p>Hello world</p>
                 <p>Logged in? {this.state.signedOn.toString()}</p>
                 <a href='/auth/github'>Login</a> or <a href='/logout'>Logout</a>                

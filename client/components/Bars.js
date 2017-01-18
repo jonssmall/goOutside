@@ -24,7 +24,14 @@ class Bars extends React.Component {
     render() {        
         let barArray = [];    
         this.props.barCollection.map((bar) => {
-            let visitButton = this.props.authenticated? <button>Visit</button> : null;       
+            let visitButton; 
+            if(this.props.authenticated) {
+                visitButton = (
+                    <button onClick={this.props.handleVisit.bind(null, bar.name)}>Visit</button>
+                );
+            } else {
+                visitButton = null;
+            }             
             barArray.push(
                 <p key={bar.id}>
                     <a target="_blank" href={bar.url}>{bar.name}</a>

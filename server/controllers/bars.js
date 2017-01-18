@@ -29,12 +29,13 @@ module.exports = (options) => {
             });
         },
         setUserLocation: (req, res) => {
-            Users.findOneAndUpdate({ 'github.id': req.user.github.id }, { 'location': req.params.location })
+            Users.findOneAndUpdate({ 'github.id': req.user.github.id }, { 'location': req.body.barName }, {new: true})
 			.exec(function (err, result) {
 					if (err) { throw err; }
+                    console.log(result);
 					res.json(result);
 				}
-			);
+			);            
         }
     }   
     return api;

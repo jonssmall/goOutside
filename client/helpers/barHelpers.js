@@ -8,5 +8,13 @@ module.exports = {
         }).catch(error => {
             console.log(error);
         });  
+    },
+    setBar: (barName) => {
+        return axios.put('/user', {barName: barName})
+        .then(response => {
+            return response
+        }).catch(error => {
+            console.log(error);
+        });          
     }
 }

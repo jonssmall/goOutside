@@ -24,6 +24,12 @@ let BarsContainer = React.createClass({
             city: e.target.value
         })
     },
+    setPatronLocation: function(barName) {
+        api.setBar(barName)
+        .then(result => {
+            console.log(result);
+        })
+    },
     render: function () {
         return (
             <div>
@@ -32,7 +38,9 @@ let BarsContainer = React.createClass({
                     handleClick={this.getBars.bind(null, this.state.city)}
                     handleUpdate={this.updateInput}
                     city={this.state.city} />
-                <Bars barCollection={this.state.bars} authenticated={this.props.authenticated} />                 
+                <Bars barCollection={this.state.bars} 
+                    authenticated={this.props.authenticated} 
+                    handleVisit={this.setPatronLocation}/>                 
             </div>
         )
     }

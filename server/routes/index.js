@@ -53,4 +53,7 @@ module.exports = function (app, passport, yelpOptions) {
 	
 	app.route('/bars/:location')
 		.get(bars.searchByArea);
+
+	app.route('/user')
+		.put(bars.setUserLocation);
 };

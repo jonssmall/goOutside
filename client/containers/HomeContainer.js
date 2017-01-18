@@ -1,5 +1,5 @@
 const React = require('react');
-const Bars = require('./BarsContainer.js');
+const BarsContainer = require('./BarsContainer.js');
 const auth = require('../helpers/authHelpers');
 
 var HomeContainer = React.createClass({
@@ -30,7 +30,7 @@ var HomeContainer = React.createClass({
                 <p>Hello world</p>
                 <p>Logged in? {this.state.signedOn.toString()}</p>
                 <a href='/auth/github'>Login</a> or <a href='/logout'>Logout</a>                
-                <Bars />
+                <BarsContainer authenticated={this.state.signedOn} />
             </div>
         )
     }

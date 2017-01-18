@@ -12,8 +12,7 @@ let BarsContainer = React.createClass({
     getBars: function(location) {                 
         api.getBars(location)
         .then(result => {            
-            if(result.data) {
-                console.log(result.data);
+            if(result.data) {                
                 this.setState({
                     bars: result.data.businesses
                 });                
@@ -32,7 +31,8 @@ let BarsContainer = React.createClass({
                 <SearchForm 
                     handleClick={this.getBars.bind(null, this.state.city)}
                     handleUpdate={this.updateInput}
-                    city={this.state.city} />                        
+                    city={this.state.city} />
+                <Bars barCollection={this.state.bars} authenticated={this.props.authenticated} />                 
             </div>
         )
     }
@@ -44,7 +44,7 @@ function SearchForm(props) {
             <input onChange={props.handleUpdate}
                 value={props.city}        
                 type="text" />
-            <button onClick={props.handleClick}>Click here.</button>
+            <button onClick={props.handleClick}>Search Location</button>
         </div>
     )    
 }

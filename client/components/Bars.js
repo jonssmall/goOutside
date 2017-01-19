@@ -35,7 +35,7 @@ class Bars extends React.Component {
             barArray.push(
                 <p key={bar.id}>
                     <a target="_blank" href={bar.url}>{bar.name}</a>
-                    <span>Patrons: </span>
+                    <span>Patrons: {bar.patronCount}</span>
                     {visitButton}
                 </p>
             )

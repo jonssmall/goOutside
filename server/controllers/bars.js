@@ -13,7 +13,7 @@ module.exports = (options) => {
                 var promises = data.businesses.map(function(bar) {
                     return new Promise(function(resolve, reject) {
                         Users.count({ 'location': bar.name }).exec((err, result) => {
-                            if (err) return reject(err);
+                            if (err) return reject(err);                            
                             bar.patronCount = result;
                             resolve();
                         });    
@@ -35,7 +35,7 @@ module.exports = (options) => {
                     console.log(result);
 					res.json(result);
 				}
-			);            
+			);
         }
     }   
     return api;

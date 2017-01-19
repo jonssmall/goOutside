@@ -27,7 +27,7 @@ let BarsContainer = React.createClass({
     setPatronLocation: function(barName) {
         api.setBar(barName)
         .then(result => {
-            console.log(result);
+            this.getBars(this.state.city);
         })
     },
     render: function () {

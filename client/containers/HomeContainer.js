@@ -6,17 +6,19 @@ var HomeContainer = React.createClass({
     getInitialState: function() {
         return {
             signedOn: false,
-            display: 'none'      
+            display: 'none',
+            user: null      
         }
     },
     //calls twice and makes a hideous screen flicker.
     componentWillMount: function() {        
         auth.isSignedOn()
-        .then(result => {            
+        .then(result => {                        
             if(result) {
                 this.setState({
-                    signedOn: result.data,
-                    display: 'block'
+                    signedOn: !!result.data,
+                    display: 'block',
+                    user: result.data ? result.data : null
                 });                
             }
         });
@@ -28,12 +30,23 @@ var HomeContainer = React.createClass({
         return (
             <div style={shellStyle}>
                 <p>Hello world</p>
-                <p>Logged in? {this.state.signedOn.toString()}</p>
+                <p>Logged in? {this.state.signedOn.toString()}</p>              
+                <UserPanel user={this.state.user}/>
                 <a href='/auth/github'>Login</a> or <a href='/logout'>Logout</a>                
                 <BarsContainer authenticated={this.state.signedOn} />
             </div>
         )
     }
 });
+
+function UserPanel(props) {
+    if (!props.user) return null;
+    return (
+        <div>
+            <p>Welcome {props.user.github.displayName}</p>
+            <p>Current location: {props.user.location}</p>
+        </div>
+    )
+}
 
 module.exports = HomeContainer;

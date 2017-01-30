@@ -2,7 +2,7 @@ let axios = require('axios');
 
 module.exports = {
     isSignedOn: () => {
-        return axios.get('/signedOn')
+        return axios.get('/user')
         .then(response => {
             return response
         }).catch(error => {

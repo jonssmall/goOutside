@@ -9,7 +9,8 @@ module.exports = function (app, passport, yelpOptions) {
 		if (req.isAuthenticated()) {
 			return next();
 		} else {
-			res.redirect('/login');
+			// res.redirect('/login');
+            return next();
 		}
 	}
 
@@ -35,12 +36,7 @@ module.exports = function (app, passport, yelpOptions) {
 		.get(function (req, res) {
 			req.logout();
 			res.redirect('/');
-		});	
-
-	app.route('/api/:id')
-		.get(isLoggedIn, function (req, res) {
-			res.json(req.user.github);
-		});
+		});		
 
 	app.route('/auth/github')
 		.get(passport.authenticate('github'));
@@ -55,5 +51,8 @@ module.exports = function (app, passport, yelpOptions) {
 		.get(bars.searchByArea);
 
 	app.route('/user')
-		.put(bars.setUserLocation);
+		//.put(bars.setUserLocation)
+        .get(isLoggedIn, function (req, res) {
+			res.json(req.user);
+		});
 };

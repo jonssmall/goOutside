@@ -23,18 +23,22 @@ class Bars extends React.Component {
         let barArray = [];    
         this.props.barCollection.map((bar) => {
             let visitButton; 
-            if(this.props.authenticated) {
+            if(this.props.authenticated && bar.name != this.props.currentLocation) {
                 visitButton = (
                     <button onClick={this.props.handleVisit.bind(null, bar.name)}>Visit</button>
                 );
+            } else if (this.props.authenticated && bar.name == this.props.currentLocation) {
+                visitButton = (
+                    <button onClick={this.props.handleLeave.bind(null)}>Leave</button>
+                );
             } else {
                 visitButton = null;
-            }             
+            }            
             barArray.push(
                 <p key={bar.id}>
                     <a target="_blank" href={bar.url}>{bar.name}</a>
                     <span>Patrons: {bar.patronCount}</span>
-                    {visitButton}
+                    {visitButton}                    
                 </p>
             )
         });

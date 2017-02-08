@@ -42,6 +42,9 @@ let BarsContainer = React.createClass({
             this.props.locationHandler.call(null, barName);
         })
     },
+    leaveLocation: function() {
+        this.setPatronLocation("Nowhere yet");
+    },
     render: function () {
         return (
             <div>
@@ -51,8 +54,10 @@ let BarsContainer = React.createClass({
                     handleUpdate={this.updateInput}
                     city={this.state.city} />
                 <Bars barCollection={this.state.bars} 
-                    authenticated={this.props.authenticated} 
-                    handleVisit={this.setPatronLocation}/>                 
+                    authenticated={this.props.authenticated}
+                    currentLocation={this.props.currentLocation}
+                    handleVisit={this.setPatronLocation}
+                    handleLeave={this.leaveLocation}/>                 
             </div>
         )
     }

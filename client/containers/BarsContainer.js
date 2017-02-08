@@ -12,12 +12,22 @@ let BarsContainer = React.createClass({
     getBars: function(location) {                 
         api.getBars(location)
         .then(result => {            
-            if(result.data) {                
+            if(result.data) {    
+                sessionStorage.setItem('lastSearch', location);            
                 this.setState({
                     bars: result.data.businesses
                 });                
             }
         });
+    },
+    componentDidMount: function() {
+        var lastSearch = sessionStorage.getItem('lastSearch');
+        if(lastSearch) {
+            this.setState({
+                city: lastSearch
+            });
+            this.getBars(lastSearch);
+        }
     },
     updateInput: function(e) {        
         this.setState({

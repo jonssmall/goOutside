@@ -51,7 +51,7 @@ module.exports = function (app, passport, yelpOptions) {
 		.get(bars.searchByArea);
 
 	app.route('/user')
-		//.put(bars.setUserLocation)
+		.put(bars.setUserLocation)
         .get(isLoggedIn, function (req, res) {
 			res.json(req.user);
 		});

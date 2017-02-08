@@ -23,6 +23,13 @@ var HomeContainer = React.createClass({
             }
         });
     },
+    updateUser: function(location) {        
+        let newUser = this.state.user;
+        newUser.location = location;
+        this.setState({
+            user: newUser
+        });
+    },
     render: function () {
         let shellStyle = {
             display: this.state.display
@@ -33,7 +40,7 @@ var HomeContainer = React.createClass({
                 <p>Logged in? {this.state.signedOn.toString()}</p>              
                 <UserPanel user={this.state.user}/>
                 <a href='/auth/github'>Login</a> or <a href='/logout'>Logout</a>                
-                <BarsContainer authenticated={this.state.signedOn} />
+                <BarsContainer locationHandler={this.updateUser} authenticated={this.state.signedOn} />
             </div>
         )
     }

@@ -3,14 +3,12 @@ const React = require('react');
 //TODO: Revisit why this.props is undefined everywhere but Render and how useless that is to me
 class Bars extends React.Component {
     constructor(props) {
-        super(props);
-		console.log(props);
+        super(props);		
         this.state = {
             barStash: props.barCollection
         }
     }
-    shouldComponentUpdate(nextProps) {    
-        console.log(this.state);            
+    shouldComponentUpdate(nextProps) {                   
         //return this.barStash != null && !this.barCollectionsEqual(this.barStash, nextProps.barCollection);
         return true;
     }

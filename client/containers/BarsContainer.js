@@ -27,7 +27,9 @@ let BarsContainer = React.createClass({
     setPatronLocation: function(barName) {
         api.setBar(barName)
         .then(result => {
-            this.getBars(this.state.city);
+            //TODO: compare performance of manual client state change vs. repeat query
+            this.getBars(this.state.city);            
+            this.props.locationHandler.call(null, barName);
         })
     },
     render: function () {

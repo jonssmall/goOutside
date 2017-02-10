@@ -6,16 +6,19 @@ let BarsContainer = React.createClass({
     getInitialState: function() {
         return {
             city: '',
-            bars: []      
+            bars: [],
+            isLoading: false  
         }
     },    
-    getBars: function(location) {                 
+    getBars: function(location) {
+        if (this.state.bars.length == 0) this.setState({isLoading: true });                 
         api.getBars(location)
         .then(result => {            
             if(result.data) {    
                 sessionStorage.setItem('lastSearch', location);            
                 this.setState({
-                    bars: result.data.businesses
+                    bars: result.data.businesses,
+                    isLoading: false
                 });                
             }
         });
@@ -53,6 +56,7 @@ let BarsContainer = React.createClass({
                     handleClick={this.getBars.bind(null, this.state.city)}
                     handleUpdate={this.updateInput}
                     city={this.state.city} />
+                <Loading isLoading={this.state.isLoading}/>
                 <Bars barCollection={this.state.bars} 
                     authenticated={this.props.authenticated}
                     currentLocation={this.props.currentLocation}
@@ -62,6 +66,11 @@ let BarsContainer = React.createClass({
         )
     }
 });
+
+function Loading(props) {
+    let message = props.isLoading ? <p>Loading...</p> : null;
+    return message;
+}
 
 function SearchForm(props) {
     return (

@@ -29,7 +29,7 @@ class Bars extends React.Component {
                 );
             } else if (this.props.authenticated && bar.name == this.props.currentLocation) {
                 visitButton = (
-                    <button onClick={this.props.handleLeave.bind(null)}>Leave</button>
+                    <button onClick={this.props.handleLeave.bind(null, null)}>Leave</button>
                 );
             } else {
                 visitButton = null;

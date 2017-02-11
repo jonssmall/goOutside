@@ -50,8 +50,7 @@ let BarsContainer = React.createClass({
     },
     render: function () {
         return (
-            <div>
-                <p>Hello Bars {this.state.bars.length}</p>
+            <div>                
                 <SearchForm 
                     handleClick={this.getBars.bind(null, this.state.city)}
                     handleUpdate={this.updateInput}
@@ -74,11 +73,12 @@ function Loading(props) {
 
 function SearchForm(props) {
     return (
-        <div>
+        <div className="pure-form">
             <input onChange={props.handleUpdate}
                 value={props.city}        
-                type="text" />
-            <button onClick={props.handleClick}>Search Location</button>
+                type="text"
+                placeholder="City" /> &nbsp;
+            <button className="pure-button pure-button-primary" onClick={props.handleClick}>Search</button>
         </div>
     )    
 }

@@ -25,21 +25,23 @@ class Bars extends React.Component {
             let visitButton; 
             if(this.props.authenticated && bar.name != this.props.currentLocation) {
                 visitButton = (
-                    <button onClick={this.props.handleVisit.bind(null, bar.name)}>Visit</button>
+                    //<button className="button-success pure-button" onClick={this.props.handleVisit.bind(null, bar.name)}>Visit</button>
+                    <input readOnly checked={bar.name == this.props.currentLocation} type="radio" onClick={this.props.handleVisit.bind(null, bar.name)} />
                 );
             } else if (this.props.authenticated && bar.name == this.props.currentLocation) {
                 visitButton = (
-                    <button onClick={this.props.handleLeave.bind(null, null)}>Leave</button>
+                    //<button className="button-warning pure-button" onClick={this.props.handleLeave.bind(null, null)}>Leave</button>
+                    <input readOnly checked={bar.name == this.props.currentLocation} type="radio" onClick={this.props.handleLeave.bind(null, null)} />
                 );
             } else {
                 visitButton = null;
             }            
             barArray.push(
-                <p key={bar.id}>
-                    <a target="_blank" href={bar.url}>{bar.name}</a>
-                    <span>Patrons: {bar.patronCount}</span>
-                    {visitButton}                    
-                </p>
+                <div key={bar.id}>
+                    {visitButton}
+                    <h2 style={{display: "inline-block"}}><a target="_blank" href={bar.url}>{bar.name}</a></h2>
+                    <span>&nbsp; Patrons: {bar.patronCount}</span>                    
+                </div>
             )
         });
         return (

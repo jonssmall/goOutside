@@ -36,26 +36,50 @@ var HomeContainer = React.createClass({
         };
         let currentLocation = this.state.user ? this.state.user.location : null;
         return (
-            <div style={shellStyle}>
-                <p>Hello world</p>
-                <p>Logged in? {this.state.signedOn.toString()}</p>              
-                <UserPanel user={this.state.user}/>
-                <a href='/auth/github'>Login</a> or <a href='/logout'>Logout</a>                
-                <BarsContainer 
-                    locationHandler={this.updateUser}
-                    currentLocation={currentLocation}
-                    authenticated={this.state.signedOn} />
+            <div style={shellStyle} id="layout" className="pure-g" >                     
+                <UserPanel user={this.state.user} />
+                <div className="content pure-u-1 pure-u-md-3-4">
+                    <div>            
+                        <div className="posts">
+                            <h1 className="content-subhead">Enter a city name to get started.</h1>
+                            <BarsContainer 
+                                locationHandler={this.updateUser}
+                                currentLocation={currentLocation}
+                                authenticated={this.state.signedOn} />
+                        </div>
+                    </div>
+                </div>                
             </div>
         )
     }
 });
 
 function UserPanel(props) {
-    if (!props.user) return null;
+    let userInfo;
+    if (props.user) {
+        userInfo = (
+            <div className="nav-item">
+                <p>
+                    Welcome {props.user.github.displayName}                    
+                </p>                
+                <p>Current location: {props.user.location}</p>
+                <a className="pure-button" href='/logout'>Logout</a>
+            </div>
+        );
+    } else {
+        userInfo = (
+            <div className="nav-item">
+                <a className="pure-button" href='/auth/github'>Login with Github</a>
+            </div>
+        );
+    }
     return (
-        <div>
-            <p>Welcome {props.user.github.displayName}</p>
-            <p>Current location: {props.user.location}</p>
+        <div className="sidebar pure-u-1 pure-u-md-1-4">
+            <div className="header">
+                <h1 className="brand-title">goOutside</h1>
+                <h2 className="brand-tagline">See who's visiting bars in your area.</h2>
+                {userInfo}
+            </div>
         </div>
     )
 }
